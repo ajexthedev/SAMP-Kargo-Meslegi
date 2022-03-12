@@ -425,6 +425,5 @@ stock KargoVeriSifirla(playerid)
 	PlayerData[playerid][pKargoTekstil] = false;
 	PlayerData[playerid][pKargoTekstilArac] = false;
 	PlayerData[playerid][pCheckpoint] = 0;
-
 	return 1;
 }
