@@ -160,6 +160,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 			new vehid = GetPlayerVehicleID(playerid);
 
 			SendClientMessage(playerid, -1, "{e69138}[KARGO]: {ffffff}Kargo aracından indiğin için verilerin sıfırlandı. ({9fc5e8}/kargo isbasi{ffffff})");
+			SendClientMessageEx(playerid, -1, "{e69138}[KARGO]: {ffffff}Toplam süreçte {6aa84f}%d{ffffff} kere koli taşıdın ve {6aa84f}$%d{ffffff} kazandın.", PlayerData[playerid][pKargoStreak], PlayerData[playerid][pKargoMStreak]);
 			SetVehicleToRespawn(vehid);
 			KargoVeriSifirla(playerid);
 		}
