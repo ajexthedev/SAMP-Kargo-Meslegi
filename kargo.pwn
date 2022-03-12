@@ -55,6 +55,7 @@ enum e_player_data
 {
 	bool:pKargoIsbasi,
 	pKargoStreak,
+	pKargoMStreak,
 	bool:pKargoBasladi,
 	bool:pKargoOdun,
 	bool:pKargoOdunArac,
@@ -66,7 +67,6 @@ enum e_player_data
 new PlayerData[MAX_PLAYERS][e_player_data];
 
 main () {} 
-
 new kargoveh[2];
 
 public OnGameModeInit()
@@ -250,6 +250,7 @@ CMD:kargo(playerid, params[])
 			{
 				PlayerData[playerid][pKargoIsbasi] = true;
 				PlayerData[playerid][pKargoStreak] = 0;
+				PlayerData[playerid][pKargoMStreak] = 0;
 				SendClientMessage(playerid, -1, "{e69138}[KARGO]: {ffffff}Başarıyla işbaşına giriş yaptın.");
 				SendClientMessage(playerid, -1, "{e69138}[KARGO]: {ffffff}Yakında bulunan forkliftlere binerek işe başlayabilirsin!");
 				return 1;
@@ -286,6 +287,7 @@ CMD:kargo(playerid, params[])
 		{
 			SendClientMessage(playerid, -1, "{38761d}|_________________________________|");
 			SendClientMessageEx(playerid, -1, "{e69138}[KARGO] Toplam taşıma: {ffffff}%d",  PlayerData[playerid][pKargoStreak]);
+			SendClientMessageEx(playerid, -1, "{e69138}[KARGO] Toplam kazanç: {ffffff}$%d",  PlayerData[playerid][pKargoMStreak]);
 			SendClientMessage(playerid, -1, "{38761d}|_________________________________|");
 		}
 		return 1;
@@ -348,6 +350,7 @@ CMD:kargo(playerid, params[])
 						PlayerData[playerid][pKargoOdun] = false;
 						GivePlayerMoney(playerid, pay);
 						PlayerData[playerid][pKargoStreak]++;
+						PlayerData[playerid][pKargoMStreak] += pay;
 						RandomNoktalar(playerid);
 					}
 				}
@@ -365,6 +368,7 @@ CMD:kargo(playerid, params[])
 						PlayerData[playerid][pKargoTekstil] = false;
 						GivePlayerMoney(playerid, pay);
 						PlayerData[playerid][pKargoStreak]++;
+						PlayerData[playerid][pKargoMStreak] += pay;
 						RandomNoktalar(playerid);
 					}
 				}
@@ -387,7 +391,7 @@ CMD:kargo(playerid, params[])
 				}
 			}
 		}
-	}	 
+	}
 	return 1; 
 }
 
@@ -427,5 +431,7 @@ stock KargoVeriSifirla(playerid)
 	PlayerData[playerid][pKargoTekstil] = false;
 	PlayerData[playerid][pKargoTekstilArac] = false;
 	PlayerData[playerid][pCheckpoint] = 0;
+	PlayerData[playerid][pKargoMStreak] = 0;
+
 	return 1;
 }
