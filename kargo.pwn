@@ -65,6 +65,8 @@ enum e_player_data
 
 new PlayerData[MAX_PLAYERS][e_player_data];
 
+main () {} 
+
 new kargoveh[2];
 
 public OnGameModeInit()
