@@ -176,7 +176,7 @@ public OnPlayerEnterCheckpoint(playerid)
 		GameTextForPlayer(playerid, "~g~/kargo al", 1500, 4);
 		DisablePlayerCheckpoint(playerid);
     }
-	if(PlayerData[playerid][pCheckpoint] == 2)
+	else if(PlayerData[playerid][pCheckpoint] == 2)
     {
         PlayerData[playerid][pCheckpoint] = 0;
 		GameTextForPlayer(playerid, "~g~/kargo birak", 1500, 4);
@@ -191,7 +191,7 @@ stock randomEx(min, max)
     return randm;
 }
 
-stock SendClientMessageEx(playerid, color, const text[], {Float, _}:...)
+stock SendClientMessageEx(playerid, color, const text[], {Float, _}:...) //Credits: Emmet_
 {
     static
         args,
@@ -234,9 +234,9 @@ stock SendClientMessageEx(playerid, color, const text[], {Float, _}:...)
 
 CMD:kargo(playerid, params[])
 {
-	new str[32], str2[32];
+	new str[32];
 	if(!IsPlayerConnected(playerid)) return 1;
-	if(sscanf(params,"s[32]S()[32]", str, str2))
+	if(sscanf(params,"s[32]", str))
 	{
 		SendClientMessage(playerid, -1, "{8fce00}KULLANIM:{ffffff} /kargo [parametre]");
 		SendClientMessage(playerid, -1,  "{ffd966}PARAMETRE:{c9c9c9} isbasi - veri - basla - al - birak - tamir");
@@ -267,7 +267,7 @@ CMD:kargo(playerid, params[])
 		}
 		else return SendClientMessage(playerid, -1, "{e69138}[KARGO]: {ffffff}Bir işbaşı noktasına yakın değilsin.");
 	}
-	if(!strcmp(params, "basla", true))
+	else if(!strcmp(params, "basla", true))
 	{
 		if(PlayerData[playerid][pKargoIsbasi] == false) return SendClientMessage(playerid, -1, "{e69138}[KARGO]: {ffffff}İşbaşında değilken mesleğe başlayamazsın!");
 		if(PlayerData[playerid][pKargoBasladi] == true) return SendClientMessage(playerid, -1 , "{e69138}[KARGO]: {ffffff}Zaten mesleğe başlamışsın!");
@@ -281,7 +281,7 @@ CMD:kargo(playerid, params[])
 			}
 		}
 	} 
-	if(!strcmp(params, "veri", true))
+	else if(!strcmp(params, "veri", true))
 	{
 		if(PlayerData[playerid][pKargoIsbasi] == false) return SendClientMessage(playerid, -1, "{e69138}[KARGO]: {ffffff}İşbaşında değilken görüntüleyemezsin!");
 		else
@@ -293,7 +293,7 @@ CMD:kargo(playerid, params[])
 		}
 		return 1;
 	} 
-	if(!strcmp(params, "al", true))
+	else if(!strcmp(params, "al", true))
 	{
 		if(PlayerData[playerid][pKargoIsbasi] == false) return SendClientMessage(playerid, -1, "{e69138}[KARGO]: {ffffff}İşbaşında değilken bu komutu kullanamazsın!");
 		if(PlayerData[playerid][pKargoBasladi] == false) return SendClientMessage(playerid, -1 , "{e69138}[KARGO]: {ffffff}Mesleğe başlamadan bu komutu kullanamazsın!");
@@ -332,7 +332,7 @@ CMD:kargo(playerid, params[])
 		}
 		return 1;
 	}
-	if(!strcmp(params, "birak", true))
+	else if(!strcmp(params, "birak", true))
 	{
 		new pay = 300 + randomEx(100, 150); // Oyuncuya verilecek para buradan ayarlanabilir.
 		if(PlayerData[playerid][pKargoIsbasi] == false) return SendClientMessage(playerid, -1, "{e69138}[KARGO]: {ffffff}İşbaşında değilken bu komutu kullanamazsın!");
@@ -376,7 +376,7 @@ CMD:kargo(playerid, params[])
 			}
 		}
 	}
-	if(!strcmp(params, "tamir", true))
+	else if(!strcmp(params, "tamir", true))
 	{
 		if(PlayerData[playerid][pKargoIsbasi] == false) return SendClientMessage(playerid, -1, "{e69138}[KARGO]: {ffffff}İşbaşında değilken bu komutu kullanamazsın!");
 		if(PlayerData[playerid][pKargoBasladi] == false) return SendClientMessage(playerid, -1 , "{e69138}[KARGO]: {ffffff}Mesleğe başlamadan bu komutu kullanamazsın!");
